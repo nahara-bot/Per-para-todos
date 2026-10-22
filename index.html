@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Descubre destinos turísticos del Perú: costa, sierra y selva, cultura, naturaleza, gastronomía y consejos para viajar.">
+  <title>Perú Inolvidable | Guía de destinos turísticos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="Perú Inolvidable, inicio">
+      <span class="brand-mark">P</span><span>PERÚ <b>INOLVIDABLE</b></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <nav id="mainNav" aria-label="Navegación principal">
+      <a href="#destinos">Destinos</a><a href="#regiones">Regiones</a><a href="#experiencias">Experiencias</a><a href="#consejos">Consejos</a>
+    </nav>
+    <a class="header-cta" href="#destinos">Explorar Perú <span>↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <p class="eyebrow light">UN PAÍS, MIL AVENTURAS</p>
+        <h1>El Perú se vive<br><em>con todos los sentidos.</em></h1>
+        <p class="hero-copy">De antiguas civilizaciones a paisajes que parecen infinitos. Encuentra el destino que te hará viajar.</p>
+        <a class="button button-light" href="#destinos">Descubre destinos <span>↓</span></a>
+      </div>
+      <div class="hero-note"><span class="note-line"></span><span>24 departamentos · 3 grandes regiones naturales</span></div>
+      <div class="hero-counter"><strong>01</strong><span> / 03</span></div>
+    </section>
+
+    <section class="intro section-wrap">
+      <div>
+        <p class="eyebrow">BIENVENIDO AL PERÚ</p>
+        <h2>Un viaje extraordinario<br>empieza aquí.</h2>
+      </div>
+      <p class="intro-text">Explora el legado de los Andes, la energía de la costa y la biodiversidad de la Amazonía. Esta guía reúne lugares emblemáticos y rincones fascinantes para ayudarte a imaginar y planificar tu próxima aventura.</p>
+    </section>
+
+    <section class="destinations section-wrap" id="destinos">
+      <div class="section-heading">
+        <div><p class="eyebrow">TU PRÓXIMA AVENTURA</p><h2>Destinos que enamoran</h2></div>
+        <p>Busca por nombre o filtra por región y tipo de experiencia.</p>
+      </div>
+      <div class="filters">
+        <label class="search-box"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="¿A dónde quieres ir?" aria-label="Buscar destino"></label>
+        <div class="filter-group" id="regionFilters" aria-label="Filtrar por región">
+          <button class="filter-chip active" data-region="Todos">Todos</button>
+          <button class="filter-chip" data-region="Costa">Costa</button>
+          <button class="filter-chip" data-region="Sierra">Sierra</button>
+          <button class="filter-chip" data-region="Selva">Selva</button>
+        </div>
+        <select id="typeFilter" aria-label="Filtrar por experiencia">
+          <option value="Todos">Todas las experiencias</option><option value="Cultura">Cultura e historia</option><option value="Naturaleza">Naturaleza</option><option value="Aventura">Aventura</option><option value="Playa">Playas</option><option value="Gastronomía">Gastronomía</option>
+        </select>
+      </div>
+      <p class="results-line" id="resultsCount" aria-live="polite"></p>
+      <div class="destination-grid" id="destinationGrid"></div>
+      <div class="empty-state" id="emptyState" hidden><span>⌕</span><h3>No encontramos ese destino</h3><p>Prueba con otra palabra o cambia los filtros.</p></div>
+    </section>
+
+    <section class="region-banner" id="regiones">
+      <div class="region-banner-image"></div>
+      <div class="region-banner-content">
+        <p class="eyebrow light">TRES MUNDOS POR DESCUBRIR</p>
+        <h2>De la brisa del Pacífico<br>a la inmensidad amazónica.</h2>
+        <p>El territorio peruano reúne desiertos, valles fértiles, cordilleras, lagunas, bosques nubosos y selva tropical. Cada región ofrece un ritmo y una manera distinta de conocer el país.</p>
+        <div class="region-stats"><div><strong>🌊 Costa</strong><span>Mar, desiertos y sabores</span></div><div><strong>⛰ Sierra</strong><span>Andes, historia y altura</span></div><div><strong>🌿 Selva</strong><span>Biodiversidad y ríos</span></div></div>
+      </div>
+    </section>
+
+    <section class="experiences section-wrap" id="experiencias">
+      <div class="section-heading">
+        <div><p class="eyebrow">ARMA TU PROPIA RUTA</p><h2>¿Qué te gustaría vivir?</h2></div>
+        <p>Elige una forma de viajar y encuentra ideas para tu itinerario.</p>
+      </div>
+      <div class="experience-grid">
+        <article class="experience-card culture"><span class="experience-icon">⌂</span><div><p class="eyebrow light">PATRIMONIO</p><h3>Historias que perduran</h3><p>Ciudades coloniales, sitios arqueológicos y tradiciones vivas.</p><button class="text-button" data-experience="Cultura">Ver destinos <span>↗</span></button></div></article>
+        <article class="experience-card wild"><span class="experience-icon">✳</span><div><p class="eyebrow light">AIRE LIBRE</p><h3>La naturaleza te llama</h3><p>Montañas, reservas, cataratas, lagunas y senderos.</p><button class="text-button" data-experience="Naturaleza">Ver destinos <span>↗</span></button></div></article>
+        <article class="experience-card flavor"><span class="experience-icon">✦</span><div><p class="eyebrow light">SABOR PERUANO</p><h3>Viajar también es comer</h3><p>Mercados, cocina regional y productos que cuentan historias.</p><button class="text-button" data-experience="Gastronomía">Ver destinos <span>↗</span></button></div></article>
+      </div>
+    </section>
+
+    <section class="planning" id="consejos">
+      <div class="planning-inner">
+        <div><p class="eyebrow light">ANTES DE PARTIR</p><h2>Viaja con curiosidad.<br><em>Prepárate con tiempo.</em></h2><p class="planning-copy">Un poco de planificación ayuda a disfrutar más cada destino y a cuidar los lugares que nos reciben.</p></div>
+        <div class="tips-list">
+          <article><span>01</span><div><h3>Revisa la temporada</h3><p>El clima varía mucho entre costa, Andes y Amazonía. Comprueba el pronóstico local antes de salir.</p></div></article>
+          <article><span>02</span><div><h3>Considera la altitud</h3><p>En destinos de altura, aclimátate gradualmente, hidrátate y evita esfuerzos intensos al llegar.</p></div></article>
+          <article><span>03</span><div><h3>Reserva y confirma</h3><p>Verifica horarios, accesos, entradas y transporte en fuentes oficiales, especialmente en temporada alta.</p></div></article>
+          <article><span>04</span><div><h3>Viaja de forma responsable</h3><p>Respeta las comunidades, no dejes residuos y sigue las indicaciones de áreas naturales y sitios patrimoniales.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing section-wrap">
+      <p class="eyebrow">EL PERÚ TE ESPERA</p><h2>Hay un lugar para cada viajero.</h2><p>Empieza por un destino. Déjate sorprender por todo lo demás.</p><a class="button button-dark" href="#destinos">Encontrar mi destino <span>↑</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand brand-footer" href="#inicio"><span class="brand-mark">P</span><span>PERÚ <b>INOLVIDABLE</b></span></a>
+    <p>Una guía inspiracional para descubrir el Perú.</p>
+    <span class="footer-note">Confirma siempre la información práctica con fuentes oficiales.</span>
+    <span class="copyright">© <span id="year"></span> Perú Inolvidable</span>
+  </footer>
+
+  <dialog id="destinationDialog" class="destination-dialog">
+    <button class="dialog-close" id="dialogClose" aria-label="Cerrar">×</button>
+    <img id="dialogImage" src="" alt="">
+    <div class="dialog-content"><p class="eyebrow" id="dialogRegion"></p><h2 id="dialogTitle"></h2><p id="dialogDescription"></p><div class="dialog-meta" id="dialogMeta"></div><h3>Consejos para tu visita</h3><ul id="dialogTips"></ul><p class="dialog-disclaimer">La información es orientativa. Confirma accesos, tarifas, condiciones climáticas y horarios antes de viajar.</p></div>
+  </dialog>
+</body>
+</html>
