@@ -1,0 +1,139 @@
+
+"use strict";
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Elementos principales
+  const searchInput = document.getElementById("searchInput");
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const destinationCards = document.querySelectorAll(".destination-card");
+  const destinationCount = document.getElementById("destinationCount");
+  const emptyState = document.getElementById("emptyState");
+  const destinationGrid = document.getElementById("destinationGrid");
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+  const currentYear = document.getElementById("currentYear");
+  const regionLinks = document.querySelectorAll("[data-select-region]");
+
+  // Estado de los filtros
+  let selectedRegion = "todos";
+
+  // Año actual automático
+  if (currentYear) {
+    currentYear.textContent = new Date().getFullYear();
+  }
+
+  // Buscar y filtrar destinos
+  function filterDestinations() {
+    const searchTerm = searchInput.value
+      .trim()
+      .toLocaleLowerCase("es");
+
+    let visibleCount = 0;
+
+    destinationCards.forEach((card) => {
+      const region = card.dataset.region;
+      const searchableText = [
+        card.dataset.search || "",
+        card.querySelector("h3")?.textContent || "",
+        card.querySelector(".card-location")?.textContent || "",
+        card.querySelector(".card-body p")?.textContent || ""
+      ].join(" ").toLocaleLowerCase("es");
+
+      const matchesRegion =
+        selectedRegion === "todos" ||
+        region === selectedRegion;
+
+      const matchesSearch =
+        searchableText.includes(searchTerm);
+
+      const isVisible = matchesRegion && matchesSearch;
+
+      card.hidden = !isVisible;
+
+      if (isVisible) {
+        visibleCount++;
+      }
+    });
+
+    // Actualizar contador
+    destinationCount.textContent =
+      `${visibleCount} ${visibleCount === 1 ? "destino" : "destinos"}`;
+
+    // Mostrar mensaje cuando no hay resultados
+    emptyState.hidden = visibleCount !== 0;
+
+    // Mantener una cuadrícula limpia
+    destinationGrid.setAttribute(
+      "aria-label",
+      `Resultados de destinos: ${visibleCount}`
+    );
+  }
+
+  // Cambiar región mediante los botones de filtro
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      selectedRegion = button.dataset.region;
+
+      filterButtons.forEach((filterButton) => {
+        const isActive = filterButton === button;
+
+        filterButton.classList.toggle("active", isActive);
+        filterButton.setAttribute(
+          "aria-pressed",
+          String(isActive)
+        );
+      });
+
+      filterDestinations();
+    });
+  });
+
+  // Búsqueda en tiempo real
+  searchInput.addEventListener("input", filterDestinations);
+
+  // Menú móvil
+  function closeMenu() {
+    navLinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Abrir menú");
+  }
+
+  menuToggle.addEventListener("click", () => {
+    const isOpen = navLinks.classList.toggle("open");
+
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute(
+      "aria-label",
+      isOpen ? "Cerrar menú" : "Abrir menú"
+    );
+  });
+
+  // Cerrar el menú al seleccionar una opción
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  // Cerrar el menú al pulsar Escape
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMenu();
+    }
+  });
+
+  // Los accesos a las regiones activan el filtro correspondiente
+  regionLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      const region = link.dataset.selectRegion;
+      const matchingButton = Array.from(filterButtons).find(
+        (button) => button.dataset.region === region
+      );
+
+      if (matchingButton) {
+        matchingButton.click();
+      }
+    });
+  });
+
+  // Estado inicial
+  filterDestinations();
+});
